@@ -1,0 +1,14 @@
+=============================================
+  CodeTyphon Studio
+  Typhon IDE
+  Package Information file
+=============================================
+
+PkgLibDuckDBNUMX
+
+Version: 0.0 Date: 2023-09-16 10:03
+
+
+
+
+
