@@ -1,3 +1,15 @@
+{========================================================================================
+  Include :
+  Description : Duck DB API'S
+  Author : Frédéric Libaud
+  **************************************************************************************
+  History
+  --------------------------------------------------------------------------------------
+  2024-06-21 Migration of duckdb.h
+========================================================================================}
+
+{$ifdef DYNAMIC}type{$endif}
+
 //===--------------------------------------------------------------------===//
 // Open/Connect
 //===--------------------------------------------------------------------===//
@@ -11,8 +23,7 @@ The instantiated database should be closed with 'duckdb_close'
 * out_database: The result database object.
 * returns: `DuckDBSuccess` on success or `DuckDBError` on failure.
 }
-{$ifdef STATIC}function{$else}var{$endif} duckdb_open(aPath: PAnsiChar; var vDatabase: TDDBDatabase): TDDBState; {$ifdef STATIC}external LIBDDB;{$endif}
-
+{$ifdef STATIC} function duckdb_open {$else} Tduckdb_open = function {$endif}(aPath: PAnsiChar; var vDatabase: TDDBDatabase): TDDBState; {$ifdef STATIC}external LIBDDB;{$endif}
 {
 Extended version of duckdb_open. Creates a new database or opens an existing database file stored at the the given path.
 
@@ -23,7 +34,7 @@ Extended version of duckdb_open. Creates a new database or opens an existing dat
 Note that the error must be freed using `duckdb_free`.
 * returns: `DuckDBSuccess` on success or `DuckDBError` on failure.
 }
-{$ifdef STATIC}function{$else}var{$endif} duckdb_open_ext(aPath: PAnsiChar; var vDatabase: TDDBDatabase; aConfig: TDDBConfig;
+{$ifdef STATIC} function duckdb_open_ext {$else} Tduckdb_open_ext = function {$endif} (aPath: PAnsiChar; var vDatabase: TDDBDatabase; aConfig: TDDBConfig;
                                                           var vError: PPAnsiChar): TDDBState; {$ifdef STATIC}external LIBDDB;{$endif}
 
 
@@ -35,7 +46,7 @@ Still it is recommended to always correctly close a database object after you ar
 
 * database: The database object to shut down.
 }
-{$ifdef STATIC}procedure{$else}var{$endif} duckdb_close(var vDatabase: TDDBDatabase); {$ifdef STATIC}external LIBDDB;{$endif}
+{$ifdef STATIC}procedure duckdb_close {$else} Tduckdb_close = procedure {$endif} (var vDatabase: TDDBDatabase); {$ifdef STATIC}external LIBDDB;{$endif}
 
 {
 Opens a connection to a database. Connections are required to query the database, and store transactional state
@@ -46,14 +57,14 @@ The instantiated connection should be closed using 'duckdb_disconnect'
 * out_connection: The result connection object.
 * returns: `DuckDBSuccess` on success or `DuckDBError` on failure.
 }
-{$ifdef STATIC}function{$else}var{$endif} duckdb_connect(aDatabase: TDDBDatabase; var vConnection: TDDBConnection): TDDBState; {$ifdef STATIC}external LIBDDB;{$endif}
+{$ifdef STATIC}function duckdb_connect {$else} Tduckdb_connect = function {$endif} (aDatabase: TDDBDatabase; var vConnection: TDDBConnection): TDDBState; {$ifdef STATIC}external LIBDDB;{$endif}
 
 {
 Interrupt running query
 
 * connection: The connection to interruot
 }
-{$ifdef STATIC}procedure{$else}var{$endif} duckdb_interrupt(aConnection: TDDBConnection); {$ifdef STATIC}external LIBDDB;{$endif}
+{$ifdef STATIC}procedure duckdb_interrupt {$else} Tduckdb_interrupt = procedure {$endif} (aConnection: TDDBConnection); {$ifdef STATIC}external LIBDDB;{$endif}
 
 {
 Get progress of the running query
@@ -61,20 +72,20 @@ Get progress of the running query
 * connection: The working connection
 * returns: -1 if no progress or a percentage of the progress
 }
-{$ifdef STATIC}function{$else}var{$endif} duckdb_query_progress(aConnection: TDDBConnection): Double; {$ifdef STATIC}external LIBDDB;{$endif}
+{$ifdef STATIC}function duckdb_query_progress {$else} Tduckdb_query_progress = function {$endif} (aConnection: TDDBConnection): Double; {$ifdef STATIC}external LIBDDB;{$endif}
 
 {
 Closes the specified connection and de-allocates all memory allocated for that connection.
 
 * connection: The connection to close.
 }
-{$ifdef STATIC}procedure{$else}var{$endif} duckdb_disconnect(var vConnection: TDDBConnection); {$ifdef STATIC}external LIBDDB;{$endif}
+{$ifdef STATIC}procedure duckdb_disconnect {$else} Tduckdb_disconnect = procedure {$endif} (var vConnection: TDDBConnection); {$ifdef STATIC}external LIBDDB;{$endif}
 
 {
 Returns the version of the linked DuckDB, with a version postfix for dev versions
 
 Usually used for developing C extensions that must return this for a compatibility check.
 }
-{$ifdef STATIC}function{$else}var{$endif} duckdb_library_version: PAnsiChar; {$ifdef STATIC}external LIBDDB;{$endif}
+{$ifdef STATIC}function duckdb_library_version {$else} Tduckdb_library_version = function {$endif} : PAnsiChar; {$ifdef STATIC}external LIBDDB;{$endif}
 
 

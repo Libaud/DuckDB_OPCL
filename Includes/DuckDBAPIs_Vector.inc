@@ -1,3 +1,14 @@
+{========================================================================================
+  Include :
+  Description : Duck DB API'S
+  Author : Frédéric Libaud
+  **************************************************************************************
+  History
+  --------------------------------------------------------------------------------------
+  2024-06-21 Migration of duckdb.h
+========================================================================================}
+
+{$ifdef DYNAMIC}type{$endif}
 
 //===--------------------------------------------------------------------===//
 // Vector Interface
@@ -10,7 +21,7 @@ The result must be destroyed with `duckdb_destroy_logical_type`.
 * vector: The vector get the data from
 * returns: The type of the vector
 }
-{$ifdef STATIC}function{$else}var{$endif} duckdb_vector_get_column_type(aVector: TDDBVector): TDDBLogicalType; {$ifdef STATIC}external LIBDDB;{$endif}
+{$ifdef STATIC}function duckdb_vector_get_column_type{$else}Tduckdb_vector_get_column_type = function{$endif} (aVector: TDDBVector): TDDBLogicalType; {$ifdef STATIC}external LIBDDB;{$endif}
 
 {
 Retrieves the data pointer of the vector.
@@ -21,7 +32,7 @@ How to read or write values depends on the type of the vector.
 * vector: The vector to get the data from
 * returns: The data pointer
 }
-{$ifdef STATIC}function{$else}var{$endif} duckdb_vector_get_data(aVector: TDDBVector): Pointer; {$ifdef STATIC}external LIBDDB;{$endif}
+{$ifdef STATIC}function duckdb_vector_get_data{$else}Tduckdb_vector_get_data = function{$endif} (aVector: TDDBVector): Pointer; {$ifdef STATIC}external LIBDDB;{$endif}
 
 {
 Retrieves the validity mask pointer of the specified vector.
@@ -43,7 +54,7 @@ Alternatively, the (slower) duckdb_validity_row_is_valid function can be used.
 * vector: The vector to get the data from
 * returns: The pointer to the validity mask, or NULL if no validity mask is present
 }
-{$ifdef STATIC}function{$else}var{$endif} duckdb_vector_get_validity(aVector: TDDBVector): PUInt64; {$ifdef STATIC}external LIBDDB;{$endif}
+{$ifdef STATIC}function duckdb_vector_get_validity{$else}Tduckdb_vector_get_validity = function{$endif} (aVector: TDDBVector): PUInt64; {$ifdef STATIC}external LIBDDB;{$endif}
 
 {
 Ensures the validity mask is writable by allocating it.
@@ -53,7 +64,7 @@ This allows null values to be written to the vector, regardless of whether a val
 
 * vector: The vector to alter
 }
-{$ifdef STATIC}procedure{$else}var{$endif} duckdb_vector_ensure_validity_writable(aVector: TDDBVector); {$ifdef STATIC}external LIBDDB;{$endif}
+{$ifdef STATIC}procedure duckdb_vector_ensure_validity_writable{$else}Tduckdb_vector_ensure_validity_writable = procedure{$endif} (aVector: TDDBVector); {$ifdef STATIC}external LIBDDB;{$endif}
 
 {
 Assigns a string element in the vector at the specified location.
@@ -62,7 +73,7 @@ Assigns a string element in the vector at the specified location.
 * index: The row position in the vector to assign the string to
 * str: The null-terminated string
 }
-{$ifdef STATIC}procedure{$else}var{$endif} duckdb_vector_assign_string_element(aVector: TDDBVector; aIndex: TIDX; aStr: PAnsiChar); {$ifdef STATIC}external LIBDDB;{$endif}
+{$ifdef STATIC}procedure duckdb_vector_assign_string_element{$else}Tduckdb_vector_assign_string_element = procedure {$endif} (aVector: TDDBVector; aIndex: TIDX; aStr: PAnsiChar); {$ifdef STATIC}external LIBDDB;{$endif}
 
 {
 Assigns a string element in the vector at the specified location.
@@ -72,7 +83,7 @@ Assigns a string element in the vector at the specified location.
 * str: The string
 * str_len: The length of the string (in bytes)
 }
-{$ifdef STATIC}procedure{$else}var{$endif} duckdb_vector_assign_string_element_len(aVector: TDDBVector; aStr: String; aStrLen: TIDX); {$ifdef STATIC}external LIBDDB;{$endif}
+{$ifdef STATIC}procedure duckdb_vector_assign_string_element_len{$else}Tduckdb_vector_assign_string_element_len = procedure{$endif} (aVector: TDDBVector; aStr: String; aStrLen: TIDX); {$ifdef STATIC}external LIBDDB;{$endif}
 
 {
 Retrieves the child vector of a list vector.
@@ -82,7 +93,7 @@ The resulting vector is valid as long as the parent vector is valid.
 * vector: The vector
 * returns: The child vector
 }
-{$ifdef STATIC}function{$else}var{$endif} duckdb_list_vector_get_child(aVector: TDDBVector): TDDBVector; {$ifdef STATIC}external LIBDDB;{$endif}
+{$ifdef STATIC}function duckdb_list_vector_get_child{$else}Tduckdb_list_vector_get_child = function{$endif} (aVector: TDDBVector): TDDBVector; {$ifdef STATIC}external LIBDDB;{$endif}
 
 {
 Returns the size of the child vector of the list
@@ -90,7 +101,7 @@ Returns the size of the child vector of the list
 * vector: The vector
 * returns: The size of the child list
 }
-{$ifdef STATIC}function{$else}var{$endif} duckdb_list_vector_get_size(aVector: TDDBVector): TIDX; {$ifdef STATIC}external LIBDDB;{$endif}
+{$ifdef STATIC}function duckdb_list_vector_get_size{$else}Tduckdb_list_vector_get_size = function{$endif} (aVector: TDDBVector): TIDX; {$ifdef STATIC}external LIBDDB;{$endif}
 
 {
 Sets the total size of the underlying child-vector of a list vector.
@@ -99,7 +110,7 @@ Sets the total size of the underlying child-vector of a list vector.
 * size: The size of the child list.
 * returns: The duckdb state. Returns DuckDBError if the vector is nullptr.
 }
-{$ifdef STATIC}function{$else}var{$endif} duckdb_list_vector_set_size(aVector: TDDBVector; aSize: TIDX): TDDBState; {$ifdef STATIC}external LIBDDB;{$endif}
+{$ifdef STATIC}function duckdb_list_vector_set_size{$else}Tduckdb_list_vector_set_size = function{$endif} (aVector: TDDBVector; aSize: TIDX): TDDBState; {$ifdef STATIC}external LIBDDB;{$endif}
 
 {
 Sets the total capacity of the underlying child-vector of a list.
@@ -108,7 +119,7 @@ Sets the total capacity of the underlying child-vector of a list.
 * required_capacity: the total capacity to reserve.
 * return: The duckdb state. Returns DuckDBError if the vector is nullptr.
 }
-{$ifdef STATIC}function{$else}var{$endif} duckdb_list_vector_reserve(aVector: TDDBVector; aRequiredCapacity: TIDX): TDDBState; {$ifdef STATIC}external LIBDDB;{$endif}
+{$ifdef STATIC}function duckdb_list_vector_reserve{$else}Tduckdb_list_vector_reserve= function{$endif} (aVector: TDDBVector; aRequiredCapacity: TIDX): TDDBState; {$ifdef STATIC}external LIBDDB;{$endif}
 
 {
 Retrieves the child vector of a struct vector.
@@ -119,5 +130,5 @@ The resulting vector is valid as long as the parent vector is valid.
 * index: The child index
 * returns: The child vector
 }
-{$ifdef STATIC}function{$else}var{$endif} duckdb_struct_vector_get_child(aVector: TDDBVector; aIndex: TIDX): TDDBVector; {$ifdef STATIC}external LIBDDB;{$endif}
+{$ifdef STATIC}function duckdb_struct_vector_get_child{$else}Tduckdb_struct_vector_get_child = function{$endif} (aVector: TDDBVector; aIndex: TIDX): TDDBVector; {$ifdef STATIC}external LIBDDB;{$endif}
 

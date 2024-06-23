@@ -1,3 +1,14 @@
+{========================================================================================
+  Include :
+  Description : Duck DB API'S
+  Author : Frédéric Libaud
+  **************************************************************************************
+  History
+  --------------------------------------------------------------------------------------
+  2024-06-21 Migration of duckdb.h
+========================================================================================}
+
+{$ifdef DYNAMIC}type{$endif}
 
 //===--------------------------------------------------------------------===//
 // Streaming Result Interface
@@ -19,6 +30,6 @@ It is not known beforehand how many chunks will be returned by this result.
 * result: The result object to fetch the data chunk from.
 * returns: The resulting data chunk. Returns `NULL` if the result has an error.
 }
-{$ifdef STATIC}function{$else}var{$endif} duckdb_stream_fetch_chunk(aResult: TDDBResult): TDDBDataChunk; cdecl; {$ifdef STATIC}external LIBDDB;{$endif}
+{$ifdef STATIC}function duckdb_stream_fetch_chunk{$else}Tduckdb_stream_fetch_chunk = function{$endif} (aResult: TDDBResult): TDDBDataChunk; cdecl; {$ifdef STATIC}external LIBDDB;{$endif}
 
 

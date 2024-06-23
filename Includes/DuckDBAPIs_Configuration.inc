@@ -1,3 +1,14 @@
+{========================================================================================
+  Include :
+  Description : Duck DB API'S
+  Author : Frédéric Libaud
+  **************************************************************************************
+  History
+  --------------------------------------------------------------------------------------
+  2024-06-21 Migration of duckdb.h
+========================================================================================}
+
+{$ifdef DYNAMIC}type{$endif}
 
 //===--------------------------------------------------------------------===//
 // Configuration
@@ -11,7 +22,7 @@ This will always succeed unless there is a malloc failure.
 * out_config: The result configuration object.
 * returns: `DuckDBSuccess` on success or `DuckDBError` on failure.
 }
-{$ifdef STATIC}function{$else}var{$endif} duckdb_create_config(var vConfig: TDDBConfig): TDDBState; {$ifdef STATIC}external LIBDDB;{$endif}
+{$ifdef STATIC}function duckdb_create_config{$else}Tduckdb_create_config = function{$endif} (var vConfig: TDDBConfig): TDDBState; {$ifdef STATIC}external LIBDDB;{$endif}
 
 {
 This returns the total amount of configuration options available for usage with `duckdb_get_config_flag`.
@@ -20,7 +31,7 @@ This should not be called in a loop as it internally loops over all the options.
 
 * returns: The amount of config options available.
 }
-{$ifdef STATIC}function{$else}var{$endif} duckdb_config_count: SizeUInt; {$ifdef STATIC}external LIBDDB;{$endif}
+{$ifdef STATIC}function duckdb_config_count{$else}Tduckdb_config_count = function{$endif} : SizeUInt; {$ifdef STATIC}external LIBDDB;{$endif}
 
 {
 Obtains a human-readable name and description of a specific configuration option. This can be used to e.g.
@@ -33,7 +44,7 @@ The result name or description MUST NOT be freed.
 * out_description: A description of the configuration flag.
 * returns: `DuckDBSuccess` on success or `DuckDBError` on failure.
 }
-{$ifdef STATIC}function{$else}var{$endif} duckdb_get_config_flag(aIndex: SizeUInt; var vName, vDescription: PAnsiChar): TDDBState; {$ifdef STATIC}external LIBDDB;{$endif}
+{$ifdef STATIC}function duckdb_get_config_flag{$else}Tduckdb_get_config_flag = function{$endif} (aIndex: SizeUInt; var vName, vDescription: PAnsiChar): TDDBState; {$ifdef STATIC}external LIBDDB;{$endif}
 
 {
 Sets the specified option for the specified configuration. The configuration option is indicated by name.
@@ -48,12 +59,12 @@ This can fail if either the name is invalid, or if the value provided for the op
 * option: The value to set the configuration flag to.
 * returns: `DuckDBSuccess` on success or `DuckDBError` on failure.
 }
-{$ifdef STATIC}function{$else}var{$endif} duckdb_set_config(aConfig: TDDBConfig; aName: PAnsiChar; aOption: PAnsiChar): TDDBState; {$ifdef STATIC}external LIBDDB;{$endif}
+{$ifdef STATIC}function duckdb_set_config{$else}Tduckdb_set_config = function{$endif} (aConfig: TDDBConfig; aName: PAnsiChar; aOption: PAnsiChar): TDDBState; {$ifdef STATIC}external LIBDDB;{$endif}
 
 {
 Destroys the specified configuration option and de-allocates all memory allocated for the object.
 
 * config: The configuration object to destroy.
 }
-{$ifdef STATIC}procedure{$else}var{$endif} duckdb_destroy_config(var vConfig: TDDBConfig); {$ifdef STATIC}external LIBDDB;{$endif}
+{$ifdef STATIC}procedure duckdb_destroy_config{$else}Tduckdb_destroy_config = procedure{$endif} (var vConfig: TDDBConfig); {$ifdef STATIC}external LIBDDB;{$endif}
 

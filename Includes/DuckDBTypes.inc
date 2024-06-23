@@ -316,4 +316,35 @@ type
   	              DUCKDBPENDINGERROR = 2);
 
 
+  //===--------------------------------------------------------------------===//
+  // Replacement Scans
+  //===--------------------------------------------------------------------===//
+
+  TDDBReplacementScanInfo = Pointer;
+
+  TDDBReplacementCallback = procedure(aInfo: TDDBReplacementScanInfo;
+                                      aTableName: PAnsiChar;
+                                      aData: Pointer); cdecl;
+
+  //===--------------------------------------------------------------------===//
+  // Table Functions
+  //===--------------------------------------------------------------------===//
+
+  {$ifndef DDB_NO_EXTENSION_FUNCTIONS}
+    TDDBTableFunction = Pointer;
+    TDDBBindInfo = Pointer;
+    TDDBInitInfo = Pointer;
+    TDDBFunctionInfo = Pointer;
+
+    TDDBTableFunctionBind = procedure (aInfo: TDDBBindInfo);
+    TDDBTableFunctionInit = procedure (aInfo: TDDBInitInfo);
+    TDDBMainTableFunction = procedure (aInfo: TDDBFunctionInfo; aOutput: TDDBDataChunk);
+    TDDBDeleteCallback = procedure (aData: Pointer);
+  {$endif}
+
+  //===--------------------------------------------------------------------===//
+  // Threading Information
+  //===--------------------------------------------------------------------===//
+
+  TDDBTaskState = Pointer;
 

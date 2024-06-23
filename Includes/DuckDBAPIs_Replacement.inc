@@ -1,13 +1,18 @@
+{========================================================================================
+  Include :
+  Description : Duck DB API'S
+  Author : Frédéric Libaud
+  **************************************************************************************
+  History
+  --------------------------------------------------------------------------------------
+  2024-06-21 Migration of duckdb.h
+========================================================================================}
+
+{$ifdef DYNAMIC}type{$endif}
 
 //===--------------------------------------------------------------------===//
 // Replacement Scans
 //===--------------------------------------------------------------------===//
-type
-  TDDBReplacementScanInfo = Pointer;
-
-  TDDBReplacementCallback = procedure(aInfo: TDDBReplacementScanInfo;
-                                      aTableName: PAnsiChar;
-                                      aData: Pointer); cdecl;
 
 {
 Add a replacement scan definition to the specified database
@@ -17,7 +22,7 @@ Add a replacement scan definition to the specified database
 * extra_data: Extra data that is passed back into the specified callback
 * delete_callback: The delete callback to call on the extra data, if any
 }
-{$ifdef STATIC}procedure{$else}var{$endif} duckdb_add_replacement_scan(aDB: TDDBDatabase;
+{$ifdef STATIC}procedure duckdb_add_replacement_scan{$else}Tduckdb_add_replacement_scan = procedure{$endif} (aDB: TDDBDatabase;
                                                                        aReplacement: TDDBReplacementCallback;
                                                                        aExtraData: Pointer;
                                                                        aDeleteCallback: TDDBDeleteCallback); {$ifdef STATIC}external LIBDDB;{$endif}
@@ -29,7 +34,7 @@ Sets the replacement function name to use. If this function is called in the rep
 * info: The info object
 * function_name: The function name to substitute.
 }
-{$ifdef STATIC}procedure{$else}var{$endif} duckdb_replacement_scan_set_function_name(aInfo: TDDBReplacementScanInfo;
+{$ifdef STATIC}procedure duckdb_replacement_scan_set_function_name{$else}Tduckdb_replacement_scan_set_function_name = procedure{$endif} (aInfo: TDDBReplacementScanInfo;
                                                                                      aFunctionName: PAnsiChar); cdecl; {$ifdef STATIC}external LIBDDB;{$endif}
 
 {
@@ -38,7 +43,7 @@ Adds a parameter to the replacement scan function.
 * info: The info object
 * parameter: The parameter to add.
 }
-{$ifdef STATIC}procedure{$else}var{$endif} duckdb_replacement_scan_add_parameter(aInfo: TDDBReplacementScanInfo;
+{$ifdef STATIC}procedure duckdb_replacement_scan_add_parameter{$else}Tduckdb_replacement_scan_add_parameter = procedure{$endif} (aInfo: TDDBReplacementScanInfo;
                                                                                  aParameter: TDDBValue); cdecl; {$ifdef STATIC}external LIBDDB;{$endif}
 
 {
@@ -47,7 +52,7 @@ Report that an error has occurred while executing the replacement scan.
 * info: The info object
 * error: The error message
 }
-{$ifdef STATIC}procedure{$else}var{$endif} duckdb_replacement_scan_set_error(aInfo: TDDBReplacementScanInfo;
+{$ifdef STATIC}procedure duckdb_replacement_scan_set_error{$else}Tduckdb_replacement_scan_set_error = procedure{$endif} (aInfo: TDDBReplacementScanInfo;
                                                                              aError: PAnsiChar); cdecl; {$ifdef STATIC}external LIBDDB;{$endif}
 
 

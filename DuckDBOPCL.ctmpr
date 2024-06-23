@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CONFIG>
+  <MultiProject FileVersion="1">
+    <Elements Count="1">
+      <Element0 FileName="Packages/PkgLibDuckDB.ctpkg"/>
+    </Elements>
+  </MultiProject>
+</CONFIG>
