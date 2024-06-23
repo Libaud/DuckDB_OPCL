@@ -1,4 +1,5 @@
 
+{$ifdef DYNAMIC_CALL}
 var
   // Appender
   duckdb_appender_create: Tduckdb_appender_create;
@@ -262,4 +263,5 @@ var
   duckdb_list_vector_set_size: Tduckdb_list_vector_set_size;
   duckdb_list_vector_reserve: Tduckdb_list_vector_reserve;
   duckdb_struct_vector_get_child: Tduckdb_struct_vector_get_child;
+{$endif}
 

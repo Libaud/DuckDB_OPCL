@@ -8,7 +8,7 @@
   2024-06-21 Migration of duckdb.h
 ========================================================================================}
 
-{$ifdef DYNAMIC}
+{$ifdef DYNAMIC_LOAD}
 const
   NilHandle = 0;
 
@@ -17,7 +17,9 @@ var
   DDBDefaultLibraryName: String = LIBDDB;
   DDBLoadedLibraryName: UnicodeString;
   DDBLibRefCount: Integer;
+{$endif}
 
+{$ifdef DYNAMIC_CALL}
 procedure LoadAddresses(aLibHandle: TLibHandle);
 begin
   pointer(duckdb_open):= GetProcedureAddress(aLibHandle, 'duckdb_open');
@@ -250,6 +252,9 @@ begin
   pointer(duckdb_execution_is_finished):= GetProcedureAddress(aLibHandle, 'duckdb_execution_is_finished');
   pointer(duckdb_stream_fetch_chunk):= GetProcedureAddress(aLibHandle, 'duckdb_stream_fetch_chunk');
 end;
+{$endif}
+
+{$ifdef DYNAMIC_LOAD}
 
 function TryInitializeDDBLibrary(const aLibraryName: UnicodeString): integer;
 var
@@ -268,7 +273,9 @@ begin
       Exit(-1);
     end;
     DDBLoadedLibraryName := N;
+    {$ifdef DYNAMIC_CALL}
     LoadAddresses(DDDBLibraryHandle);
+    {$endif}
   end;
 end;
 

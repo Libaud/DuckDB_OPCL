@@ -8,7 +8,7 @@
   2024-06-21 Migration of duckdb.h
 ========================================================================================}
 
-{$ifdef DYNAMIC}type{$endif}
+{$ifdef DYNAMIC_CALL}type{$endif}
 
 //===--------------------------------------------------------------------===//
 // Extract Statements
@@ -25,9 +25,9 @@ If the extract fails, `duckdb_extract_statements_error` can be called to obtain 
 * out_extracted_statements: The resulting extracted statements object
 * returns: The number of extracted statements or 0 on failure.
 }
-{$ifdef STATIC}function duckdb_extract_statements{$else}Tduckdb_extract_statements = function{$endif} (aConnection: TDDBConnection;
+{$ifdef STATIC_CALL}function duckdb_extract_statements{$else}Tduckdb_extract_statements = function{$endif} (aConnection: TDDBConnection;
                                                                     aQuery: PAnsiChar;
-                                                                    vExtractedStatements: PDDBExtractedStatements): TIDX; {$ifdef STATIC}external LIBDDB;{$endif}
+                                                                    vExtractedStatements: PDDBExtractedStatements): TIDX; {$ifdef STATIC_CALL}external LIBDDB;{$endif}
 
 {
 Prepare an extracted statement.
@@ -40,10 +40,10 @@ If the prepare fails, `duckdb_prepare_error` can be called to obtain the reason 
 * out_prepared_statement: The resulting prepared statement object
 * returns: `DuckDBSuccess` on success or `DuckDBError` on failure.
 }
-{$ifdef STATIC}function duckdb_prepare_extracted_statement{$else}Tduckdb_prepare_extracted_statement = function{$endif} (aConnection: TDDBConnection;
+{$ifdef STATIC_CALL}function duckdb_prepare_extracted_statement{$else}Tduckdb_prepare_extracted_statement = function{$endif} (aConnection: TDDBConnection;
                                                                              aExtracted_statements: TDDBExtractedStatements;
                                                                              aIndex: TIDX;
-                                                                             vPreparedStatement: PDDBPreparedStatement): TDDBState; {$ifdef STATIC}external LIBDDB;{$endif}
+                                                                             vPreparedStatement: PDDBPreparedStatement): TDDBState; {$ifdef STATIC_CALL}external LIBDDB;{$endif}
 
 {
 Returns the error message contained within the extracted statements.
@@ -51,12 +51,12 @@ The result of this function must not be freed. It will be cleaned up when `duckd
 * result: The extracted statements to fetch the error from.
 * returns: The error of the extracted statements.
 }
-{$ifdef STATIC}function duckdb_extract_statements_error{$else}Tduckdb_extract_statements_error = function{$endif} (aExtractedStatements: TDDBExtractedStatements): PChar; cdecl; {$ifdef STATIC}external LIBDDB;{$endif}
+{$ifdef STATIC_CALL}function duckdb_extract_statements_error{$else}Tduckdb_extract_statements_error = function{$endif} (aExtractedStatements: TDDBExtractedStatements): PChar; cdecl; {$ifdef STATIC_CALL}external LIBDDB;{$endif}
 
 {
 De-allocates all memory allocated for the extracted statements.
 * extracted_statements: The extracted statements to destroy.
 }
-{$ifdef STATIC}procedure duckdb_destroy_extracted{$else}Tduckdb_destroy_extracted = procedure{$endif} (var vExtractedStatements: PDDBExtractedStatements); {$ifdef STATIC}external LIBDDB;{$endif}
+{$ifdef STATIC_CALL}procedure duckdb_destroy_extracted{$else}Tduckdb_destroy_extracted = procedure{$endif} (var vExtractedStatements: PDDBExtractedStatements); {$ifdef STATIC_CALL}external LIBDDB;{$endif}
 
 

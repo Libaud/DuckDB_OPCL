@@ -12,14 +12,10 @@
   {$MACRO ON}
 {$endif}
 
-{$ifdef STATIC_WITHDYNAMIC_LOAD or STATIC_WITHLOAD_DYNAMICALLY}
-  {$define STATIC}
-  {$define }
+{$ifdef STATIC_CALL and DYNAMIC_LOAD}
 {$else}
   {$ifdef DYNAMIC_LOAD or LOAD_DYNAMICALLY}
-    {$define DYNAMIC}
   {$else}
-    {$define STATIC}
   {$endif}
 {$endif}
 

@@ -1,0 +1,1 @@
+DuckDB OPCL (Object Pascal Client Library) est un package pour Delphi, Lazarus ou bien Typhon. Permettent d'avoir un support de système de base de données DuckDB.

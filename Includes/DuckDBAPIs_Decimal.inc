@@ -8,7 +8,7 @@
   2024-06-21 Migration of duckdb.h
 ========================================================================================}
 
-{$ifdef DYNAMIC}type{$endif}
+{$ifdef DYNAMIC_CALL}type{$endif}
 
 //===--------------------------------------------------------------------===//
 // Decimal Helpers
@@ -19,6 +19,6 @@ Converts a TDDBDecimal object (as obtained from a `DUCKDB_TYPE_DECIMAL` column) 
 * val: The decimal value.
 * returns: The converted `double` element.
 }
-{$ifdef STATIC}function duckdb_decimal_to_double{$else}Tduckdb_decimal_to_double = function{$endif} (aVal: TDDBDecimal): Double; {$ifdef STATIC}external LIBDDB;{$endif}
+{$ifdef STATIC_CALL}function duckdb_decimal_to_double{$else}Tduckdb_decimal_to_double = function{$endif} (aVal: TDDBDecimal): Double; {$ifdef STATIC_CALL}external LIBDDB;{$endif}
 
 
