@@ -1,4 +1,4 @@
-{========================================================================================
+﻿{========================================================================================
   Include : DuckDBAPI
   Description : Duck DB API's configuration
   Author : Frédéric Libaud
@@ -24,4 +24,6 @@
 {$DEFINE DUCKDB_API_0_3_2 = 2}
 {$DEFINE DUCKDB_API_LATEST = DUCKDB_API_0_3_2}
 {$DEFINE DUCKDB_API_VERSION = DUCKDB_API_LATEST}
+
+{ end of include file }
 

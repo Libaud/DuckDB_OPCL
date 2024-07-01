@@ -14,13 +14,12 @@ unit DuckDBAPI;
   {$mode objfpc}{$H+}
 {$endif}
 
-{$i DuckDBAPI.inc}
+{$I *.inc}
 
 interface
 
 uses
   Classes, SysUtils
-  {$ifdef FPC}, CTypes{$endif}
   {$ifdef WINDOWS}, Windows{$endif};
 
 {$i DuckDBLib.inc}
@@ -29,20 +28,15 @@ uses
 
 {$i DuckDBAPIs.inc}
 
-{$ifdef DYNAMIC}
-  {$i DuckDBAPIDynamic.inc}
-{$endif}
+{$i DuckDBAPIDynamic.inc}
 
 implementation
 
 uses
   DuckDBAPIExceptions, DuckDBAPIRessources;
 
-{$ifdef DYNAMIC}
-  {$i DynamicDuckDB.inc}
-{$else}
-  {$i StaticDuckDB.inc}
-{$endif}
+{$i DynamicDuckDB.inc}
+{$i StaticDuckDB.inc}
 
 end.
 

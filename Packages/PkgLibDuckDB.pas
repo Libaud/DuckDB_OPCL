@@ -1,4 +1,4 @@
-{ This file was automatically created by Lazarus or Typhon IDE. Do not edit!
+{ This file was automatically created by Typhon IDE. Do not edit!
   This source is only used to compile and install the package.
  }
 

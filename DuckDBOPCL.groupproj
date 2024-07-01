@@ -1,7 +1,12 @@
 ﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
     <PropertyGroup>
-        <ProjectGuid>{4BC75848-AAE7-4E8C-BBAD-0B6100CA7807}</ProjectGuid>
+        <ProjectGuid>{4D69895D-EE62-4A65-83B1-67CAD59EC6EA}</ProjectGuid>
     </PropertyGroup>
+    <ItemGroup>
+        <Projects Include="Packages\PkgLibDuckDB.dproj">
+            <Dependencies/>
+        </Projects>
+    </ItemGroup>
     <ProjectExtensions>
         <Borland.Personality>Default.Personality.12</Borland.Personality>
         <Borland.ProjectType/>
@@ -9,14 +14,23 @@
             <Default.Personality/>
         </BorlandProject>
     </ProjectExtensions>
+    <Target Name="PkgLibDuckDB">
+        <MSBuild Projects="Packages\PkgLibDuckDB.dproj"/>
+    </Target>
+    <Target Name="PkgLibDuckDB:Clean">
+        <MSBuild Projects="Packages\PkgLibDuckDB.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="PkgLibDuckDB:Make">
+        <MSBuild Projects="Packages\PkgLibDuckDB.dproj" Targets="Make"/>
+    </Target>
     <Target Name="Build">
-        <CallTarget/>
+        <CallTarget Targets="PkgLibDuckDB"/>
     </Target>
     <Target Name="Clean">
-        <CallTarget/>
+        <CallTarget Targets="PkgLibDuckDB:Clean"/>
     </Target>
     <Target Name="Make">
-        <CallTarget/>
+        <CallTarget Targets="PkgLibDuckDB:Make"/>
     </Target>
     <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
 </Project>

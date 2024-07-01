@@ -25,6 +25,7 @@ package PkgLibDuckDB;
 {$IMAGEBASE $400000}
 {$DEFINE DEBUG}
 {$ENDIF IMPLICITBUILDING}
+{$DESCRIPTION 'DuckDB Object Pascal Client Library'}
 {$IMPLICITBUILD ON}
 
 requires
