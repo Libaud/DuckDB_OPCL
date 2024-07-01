@@ -1,3 +1,12 @@
+{========================================================================================
+  Include : DuckDDBAPIDynamic
+  Description : Duck DB API'S
+  Author : Frédéric Libaud
+  **************************************************************************************
+  History
+  --------------------------------------------------------------------------------------
+  2024-06-21 Migration of duckdb.h
+========================================================================================}
 
 {$ifdef DYNAMIC_CALL}
 var
@@ -30,7 +39,7 @@ var
   duckdb_append_null: Tduckdb_append_null;
   duckdb_append_data_chunk: Tduckdb_append_data_chunk;
   // Arrow Interface
-  duckdb_query_arrow: Tduckdb_query_arrow;
+  duckdb_query_arrow: Tduckdb_query_arrow {$ifdef FPC};{$endif} deprecated;
   duckdb_query_arrow_schema: Tduckdb_query_arrow_schema;
   duckdb_prepared_arrow_schema: Tduckdb_prepared_arrow_schema;
   duckdb_query_arrow_array: Tduckdb_query_arrow_array;
@@ -264,4 +273,6 @@ var
   duckdb_list_vector_reserve: Tduckdb_list_vector_reserve;
   duckdb_struct_vector_get_child: Tduckdb_struct_vector_get_child;
 {$endif}
+
+{ end of include file }
 

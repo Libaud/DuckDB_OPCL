@@ -1,4 +1,4 @@
-{========================================================================================
+﻿{========================================================================================
   Include :
   Description : Duck DB API'S
   Author : Frédéric Libaud
@@ -32,4 +32,5 @@ It is not known beforehand how many chunks will be returned by this result.
 }
 {$ifdef STATIC_CALL}function duckdb_stream_fetch_chunk{$else}Tduckdb_stream_fetch_chunk = function{$endif} (aResult: TDDBResult): TDDBDataChunk; cdecl; {$ifdef STATIC_CALL}external LIBDDB;{$endif}
 
+{ end of include file }
 

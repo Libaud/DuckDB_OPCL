@@ -1,4 +1,4 @@
-{========================================================================================
+﻿{========================================================================================
   Include : DuckDBLib
   Description : Duck DB API'S
   Author : Frédéric Libaud
@@ -23,4 +23,5 @@ const
   LIBDDB = 'libduckdb.dylib';
   {$endif}
 
+{ end of include file }
 

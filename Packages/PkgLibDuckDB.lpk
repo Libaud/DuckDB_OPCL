@@ -6,9 +6,14 @@
     <CompilerOptions>
       <Version Value="11"/>
       <SearchPaths>
+        <IncludeFiles Value="../Includes"/>
         <OtherUnitFiles Value="../Sources"/>
-        <UnitOutputDirectory Value="lib/$(TargetCPU)-$(TargetOS)/"/>
+        <UnitOutputDirectory Value="lib/$(TargetCPU)-$(TargetOS)"/>
       </SearchPaths>
+      <Other>
+        <CustomOptions Value="-dSTATIC_CALL
+-dDYNAMIC_LOAD"/>
+      </Other>
     </CompilerOptions>
     <Files>
       <Item>
@@ -22,6 +27,7 @@
       </Item>
     </RequiredPkgs>
     <UsageOptions>
+      <IncludePath Value="../Includes"/>
       <UnitPath Value="$(PkgOutDir)"/>
     </UsageOptions>
     <PublishOptions>

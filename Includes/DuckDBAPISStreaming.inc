@@ -6,6 +6,7 @@
   History
   --------------------------------------------------------------------------------------
   2024-06-21 Migration of duckdb.h
+  2024-06-27 Upgrading for DuckDB 1.0 support
 ========================================================================================}
 
 {$ifdef DYNAMIC_CALL}type{$endif}
@@ -30,6 +31,10 @@ It is not known beforehand how many chunks will be returned by this result.
 * result: The result object to fetch the data chunk from.
 * returns: The resulting data chunk. Returns `NULL` if the result has an error.
 }
-{$ifdef STATIC_CALL}function duckdb_stream_fetch_chunk{$else}Tduckdb_stream_fetch_chunk = function{$endif} (aResult: TDDBResult): TDDBDataChunk; cdecl; {$ifdef STATIC_CALL}external LIBDDB;{$endif}
+{$ifdef STATIC_CALL}function duckdb_stream_fetch_chunk
+             {$else}Tduckdb_stream_fetch_chunk = function{$endif} (aResult: TDDBResult): TDDBDataChunk; cdecl;
+                                                 {$ifdef STATIC_CALL}cdecl; external LIBDDB;{$endif} {$ifndef DCC}deprecated;{$endif}
 
+
+{ end of include file }
 
